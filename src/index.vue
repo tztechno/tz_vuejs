@@ -17,7 +17,7 @@
         new Vue({
             el: '#app',
             data: {
-                message: 'Hello, src!'
+                message: 'Hello, Vue.js! from src!'
             }
         });
     </script>
