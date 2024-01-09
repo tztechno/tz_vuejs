@@ -16,7 +16,7 @@
         new Vue({
             el: '#app',
             data: {
-                message: 'Hello, pages!'
+                message: 'Hello, Vue.js! from pages'
             }
         });
     </script>
