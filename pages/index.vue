@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World with Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <!-- Vue.jsをCDNから読み込む -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello, Vue.js!'
+            }
+        });
+    </script>
+</body>
+</html>
