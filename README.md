@@ -6,7 +6,7 @@ https://tztechno.github.io/tz_vuejs/hello_world.html
 
 https://tztechno.github.io/tz_vuejs/hello_world2.html
 
-https://tztechno.github.io/tz_vuejs/hello_world3.html
+
 
 ### index.html:
 
