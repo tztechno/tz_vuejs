@@ -2,6 +2,10 @@
 
 https://tztechno.github.io/tz_vuejs/
 
+https://tztechno.github.io/tz_vuejs/hello_world.html
+
+https://tztechno.github.io/tz_vuejs/hello_world2.html
+
 
 ### index.html:
 
