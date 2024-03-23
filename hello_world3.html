@@ -11,17 +11,17 @@
 
 <div id="app">
     <h1>{{ message }}</h1>
-    <input v-model="inputText" placeholder="Type something">
-    <p>You typed: {{ inputText }}</p>
+    <input v-model.number="inputNumber" placeholder="Type a number">
+    <p>You typed: {{ inputNumber }}</p>
+    <p>Square root: {{ Math.sqrt(inputNumber) }}</p>
 </div>
 
 <script>
-    // Vue インスタンスを作成
     var app = new Vue({
-        el: '#app', // HTMLのどの要素にVueを適用するか指定
+        el: '#app',
         data: {
-            message: 'Hello, Vue.js!',
-            inputText: ''
+            message: 'Enter a number to get its square root',
+            inputNumber: null
         }
     });
 </script>
