@@ -14,6 +14,9 @@ https://tztechno.github.io/tz_vuejs/hello_world2.html
 
 https://tztechno.github.io/tz_vuejs/hello_world3.html
 
+ボタンを押すとサイコロを振る
+
+https://tztechno.github.io/tz_vuejs/hello_world4.html
 
 
 
