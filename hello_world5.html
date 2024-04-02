@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +7,16 @@
   <title>Vue Calendar</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <style>
+    #calendar-container {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@IshiiStpete" />
-	<meta name="twitter:title" content="Calendar of this month">	
-	
+	<meta name="twitter:title" content="Calendar of this month">		
 </head>
 <body>
   <div id="app">
@@ -43,21 +47,17 @@
       computed: {
         calendar() {
           const firstDay = this.currentMonth.clone().startOf('month');
-          const lastDay = this.currentMonth.clone().endOf('month');
-          const firstDayIndex = firstDay.day();
-          const lastDayIndex = lastDay.day();
-          const prevMonthDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
-          const nextMonthDays = lastDayIndex === 6 ? 0 : 6 - lastDayIndex;
-          const totalDays = firstDay.daysInMonth() + prevMonthDays + nextMonthDays + 7; // 6 rows * 7 days + 7 days for potential overlap
+          const firstDayOfWeek = firstDay.day(); // 1st day of the month's day of the week
+          const totalDays = firstDay.daysInMonth() + firstDayOfWeek + 6; // total days including previous month and potential overflow from next month
 
           let calendar = [];
           let week = [];
 
-          for (let i = 1; i <= totalDays; i++) {
+          for (let i = 1 - firstDayOfWeek; i <= totalDays; i++) {
             const day = moment().set({
               year: this.currentMonth.year(),
               month: this.currentMonth.month(),
-              date: i - prevMonthDays
+              date: i
             });
             week.push(day);
             if (week.length === 7) {
@@ -80,7 +80,5 @@
 </body>
 </html>
 
-</body>
-</html>
 
 
