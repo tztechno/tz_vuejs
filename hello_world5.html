@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue.js Example</title>
-    <!-- Vue.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Calendar</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@IshiiStpete" />
 	<meta name="twitter:title" content="Calendar of this and next month">
-    
+	
 </head>
 <body>
-	
-///////////////////////////////////////////////////////////////////
-	
-<div id="app">
-    <p>{{ message }}</p>
-    <button @click="rollDice">Roll Dice</button>
-    <h1>{{ diceResult }}</h1>
-</div>
+  <div id="app">
+    <h1>{{ currentMonth.format('MMMM YYYY') }}</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th v-for="day in daysOfWeek" :key="day">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(week, index) in calendar" :key="index">
+          <td v-for="day in week" :key="day" :class="{ 'next-month': day.month() !== currentMonth.month() }">{{ day.format('D') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Click the button to roll the dice',
-            diceResult: null
-        },
-        methods: {
-            rollDice: function() {
-                this.diceResult = Math.floor(Math.random() * 6) + 1;
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        currentMonth: moment(),
+        daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      },
+      computed: {
+        calendar() {
+          const firstDay = this.currentMonth.clone().startOf('month');
+          const lastDay = this.currentMonth.clone().endOf('month');
+          const firstDayIndex = firstDay.day();
+          const lastDayIndex = lastDay.day();
+          const prevMonthDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+          const nextMonthDays = lastDayIndex === 6 ? 0 : 6 - lastDayIndex;
+          const totalDays = firstDay.daysInMonth() + prevMonthDays + nextMonthDays;
+
+          let calendar = [];
+          let week = [];
+
+          for (let i = 1; i <= totalDays; i++) {
+            const day = moment().set({
+              year: this.currentMonth.year(),
+              month: this.currentMonth.month(),
+              date: i - prevMonthDays
+            });
+            week.push(day);
+            if (week.length === 7) {
+              calendar.push(week);
+              week = [];
             }
-        }
-    });
-</script>
+          }
 
-///////////////////////////////////////////////////////////////////
-	
+          return calendar;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
