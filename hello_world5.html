@@ -1,7 +1,8 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue Calendar</title>
@@ -11,22 +12,25 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@IshiiStpete" />
 	<meta name="twitter:title" content="Calendar of this month">	
+	
 </head>
 <body>
   <div id="app">
     <h1>{{ currentMonth.format('MMMM YYYY') }}</h1>
-    <table border="1">
-      <thead>
-        <tr>
-          <th v-for="day in daysOfWeek" :key="day">{{ day }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(week, index) in calendar" :key="index">
-          <td v-for="day in week" :key="day" :class="{ 'next-month': day.month() !== currentMonth.month() }">{{ day.format('D') }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="calendar-container">
+      <table border="1">
+        <thead>
+          <tr>
+            <th v-for="day in formattedDaysOfWeek" :key="day">{{ day }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(week, index) in calendar" :key="index">
+            <td v-for="day in week" :key="day" :class="{ 'next-month': day.month() !== currentMonth.month() }">{{ day.format('D') }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -63,10 +67,19 @@
           }
 
           return calendar;
+        },
+        formattedDaysOfWeek() {
+          // Adjust the order of days according to moment.js locale settings
+          const firstDayOfWeek = moment().startOf('week').format('d');
+          const adjustedDaysOfWeek = [...this.daysOfWeek.slice(firstDayOfWeek), ...this.daysOfWeek.slice(0, firstDayOfWeek)];
+          return adjustedDaysOfWeek;
         }
       }
     });
   </script>
+</body>
+</html>
+
 </body>
 </html>
 
