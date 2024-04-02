@@ -38,23 +38,15 @@
       },
       computed: {
         calendar() {
-          const firstDay = this.currentMonth.clone().startOf('month');
+          const firstDay = this.currentMonth.clone().startOf('month').startOf('week'); // 1日の曜日に関係なく最初の週の日曜日に合わせる
           const lastDay = this.currentMonth.clone().endOf('month');
-          const firstDayIndex = firstDay.day();
-          const lastDayIndex = lastDay.day();
-          const prevMonthDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
-          const nextMonthDays = lastDayIndex === 6 ? 0 : 6 - lastDayIndex;
-          const totalDays = firstDay.daysInMonth() + prevMonthDays + nextMonthDays;
+          const totalDays = lastDay.date();
 
           let calendar = [];
           let week = [];
 
           for (let i = 1; i <= totalDays; i++) {
-            const day = moment().set({
-              year: this.currentMonth.year(),
-              month: this.currentMonth.month(),
-              date: i - prevMonthDays
-            });
+            const day = firstDay.clone().add(i - 1, 'days');
             week.push(day);
             if (week.length === 7) {
               calendar.push(week);
@@ -69,3 +61,4 @@
   </script>
 </body>
 </html>
+
