@@ -38,15 +38,22 @@
       },
       computed: {
         calendar() {
-          const firstDay = this.currentMonth.clone().startOf('month').startOf('week'); // 1日の曜日に関係なく最初の週の日曜日に合わせる
+          const firstDay = this.currentMonth.clone().startOf('month');
           const lastDay = this.currentMonth.clone().endOf('month');
-          const totalDays = lastDay.date();
-
+          const firstDayIndex = firstDay.day();
+          const lastDayIndex = lastDay.day();
+          const prevMonthDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+          const nextMonthDays = lastDayIndex === 6 ? 0 : 6 - lastDayIndex;
+          const totalDays = firstDay.daysInMonth() + prevMonthDays + nextMonthDays;
           let calendar = [];
           let week = [];
 
           for (let i = 1; i <= totalDays; i++) {
-            const day = firstDay.clone().add(i - 1, 'days');
+            const day = moment().set({
+              year: this.currentMonth.year(),
+              month: this.currentMonth.month(),
+              date: i - prevMonthDays
+            });
             week.push(day);
             if (week.length === 7) {
               calendar.push(week);
@@ -54,10 +61,41 @@
             }
           }
 
+          // Fill in previous month days
+          if (prevMonthDays > 0) {
+            const prevMonth = this.currentMonth.clone().subtract(1, 'month');
+            const prevMonthLastDay = prevMonth.daysInMonth();
+            for (let i = prevMonthLastDay - prevMonthDays + 1; i <= prevMonthLastDay; i++) {
+              const day = moment().set({
+                year: prevMonth.year(),
+                month: prevMonth.month(),
+                date: i
+              });
+              week.unshift(day);
+            }
+          }
+
+          // Fill in next month days
+          if (nextMonthDays > 0) {
+            const nextMonth = this.currentMonth.clone().add(1, 'month');
+            for (let i = 1; i <= nextMonthDays; i++) {
+              const day = moment().set({
+                year: nextMonth.year(),
+                month: nextMonth.month(),
+                date: i
+              });
+              week.push(day);
+            }
+          }
+
           return calendar;
         }
       }
     });
+  </script>
+</body>
+</html>
+
   </script>
 </body>
 </html>
