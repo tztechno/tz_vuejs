@@ -24,7 +24,7 @@ https://tztechno.github.io/tz_vuejs/hello_world5.html
 
 N面サイコロ
 
-https://tztechno.github.io/tz_vuejs/n_dice1.html
+https://tztechno.github.io/tz_vuejs/n_dice2.html
 
 
 ---
