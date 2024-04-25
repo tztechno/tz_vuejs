@@ -18,7 +18,7 @@ https://tztechno.github.io/tz_vuejs/hello_world3.html
 
 https://tztechno.github.io/tz_vuejs/hello_world4.html
 
-今月と来月のカレンダーを表示する
+今月のカレンダーを表示する
 
 https://tztechno.github.io/tz_vuejs/hello_world5.html
 
