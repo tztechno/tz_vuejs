@@ -12,11 +12,18 @@
 	<meta name="twitter:title" content="Click the button to roll N-sided dice">
     
     <style>
+        .dice-container {
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Adjust as needed */
+        }
+        
         .dice {
-            border: 1px solid black;
-            padding: 10px;
-            display: inline-block;
-            font-size: 24px;
+            font-size: 48px;
         }
     </style>
 </head>
@@ -27,14 +34,16 @@
     <label for="numberOfSides">Number Sides:</label>
     <input type="number" id="numberOfSides" v-model="numberOfSides" min="2" step="1">
     <button @click="rollDice">Roll Dice</button>
-    <h1 class="dice">{{ diceResult }}</h1>
+    <div class="dice-container">
+        <h1 class="dice">{{ diceResult }}</h1>
+    </div>
 </div>
 
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Click the button to roll the N sides' dice',
+            message: 'Click the button to roll the N sides dice',
             numberOfSides: 6,
             diceResult: null
         },
