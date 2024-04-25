@@ -25,14 +25,21 @@
         .dice {
             font-size: 48px;
         }
+
+        .input-container {
+            width: 100px; /* 入力枠の横幅を半分にする */
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div id="app">
     <p>{{ message }}</p>
-    <label for="numberOfSides">Number Sides:</label>
-    <input type="number" id="numberOfSides" v-model="numberOfSides" min="2" step="1">
+    <div class="input-container">
+        <label for="numberOfSides">Number Sides:</label>
+        <input type="number" id="numberOfSides" v-model="numberOfSides" min="2" step="1">
+    </div>
     <button @click="rollDice">Roll Dice</button>
     <div class="dice-container">
         <h1 class="dice">{{ diceResult }}</h1>
