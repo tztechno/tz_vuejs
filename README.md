@@ -1,7 +1,7 @@
 # tz_vuejs
 
 ---
-
+```
 Hello Vue
 hello_world.html
 
@@ -21,8 +21,8 @@ N面サイコロ
 n_dice2.html
 
 Todo
-vue_todo.html
-
+https://tztechno.github.io/tz_vuejs_cdn/vue_todo.html
+```
 
 ---
 
